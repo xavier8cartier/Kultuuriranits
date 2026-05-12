@@ -1,65 +1,87 @@
-import Image from "next/image";
+import { SearchBar } from '@/components/dashboard/SearchBar';
+import { ProgramCard } from '@/components/dashboard/ProgramCard';
+import { programs, mockFilters } from '@/lib/mockData';
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* Header section */}
+      <div className="text-center mb-12">
+        <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+          Leia klassile kultuuriprogramm
+        </h1>
+        <p className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
+          Nutikas otsing leiab sobivaid programme kiiremini ja arveldus toimub automaatselt kooli eelarvest.
+        </p>
+      </div>
+
+      <SearchBar />
+
+      {/* Filters & Content Area */}
+      <div className="flex flex-col md:flex-row gap-8">
+        
+        {/* Filter Sidebar */}
+        <div className="w-full md:w-64 flex-shrink-0">
+          <div className="bg-white p-5 rounded-xl border border-gray-200">
+            <h3 className="font-semibold text-gray-900 mb-4">Filtrid</h3>
+            
+            <div className="space-y-6">
+              <div>
+                <h4 className="text-sm font-medium text-gray-700 mb-2">Kooliaste</h4>
+                <div className="space-y-2">
+                  {mockFilters.grades.map(grade => (
+                    <label key={grade} className="flex items-center">
+                      <input type="checkbox" className="rounded border-gray-300 text-green-600 focus:ring-green-500" />
+                      <span className="ml-2 text-sm text-gray-600">{grade}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h4 className="text-sm font-medium text-gray-700 mb-2">Piirkond</h4>
+                <select className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm rounded-md">
+                  <option>Kõik piirkonnad</option>
+                  {mockFilters.regions.map(region => (
+                    <option key={region}>{region}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <h4 className="text-sm font-medium text-gray-700 mb-2">Ligipääsetavus</h4>
+                <div className="space-y-2">
+                  {mockFilters.accessibility.map(acc => (
+                    <label key={acc} className="flex items-center">
+                      <input type="checkbox" className="rounded border-gray-300 text-green-600 focus:ring-green-500" />
+                      <span className="ml-2 text-sm text-gray-600">{acc}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+            </div>
+            
+            <button className="mt-6 w-full bg-gray-100 text-gray-800 py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+              Tühista filtrid
+            </button>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Program List */}
+        <div className="flex-1">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-bold text-gray-900">Populaarsed programmid</h2>
+            <span className="text-sm text-gray-500">Näitan {programs.length} tulemust</span>
+          </div>
+          
+          <div className="space-y-4">
+            {programs.map(program => (
+              <ProgramCard key={program.id} program={program} />
+            ))}
+          </div>
         </div>
-      </main>
+
+      </div>
     </div>
   );
 }

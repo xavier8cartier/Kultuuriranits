@@ -50,7 +50,7 @@ export const programs: Program[] = [
     materials: [
       { name: 'Orienteerumiskaart.pdf', url: '#' }
     ],
-    image: 'https://images.unsplash.com/photo-1541432901042-2d8bd64b4e9c?q=80&w=2070&auto=format&fit=crop'
+    image: 'https://linnamuuseum.ee/wp-content/uploads/2022/06/katk2.png'
   },
   {
     id: '3',
@@ -76,7 +76,7 @@ export const programs: Program[] = [
       { name: 'Kunkumoori_laul.mp3', url: '#' },
       { name: 'Varjuteatri_tegemise_juhend.pdf', url: '#' }
     ],
-    image: 'https://images.unsplash.com/photo-1507676184212-d0330a156f95?q=80&w=2070&auto=format&fit=crop'
+    image: 'https://www.sudalinnateater.ee/storage/images/_thumbs/pub_th2/baba-mora.png'
   }
 ];
 

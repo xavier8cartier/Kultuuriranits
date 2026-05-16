@@ -112,7 +112,7 @@ export function Navbar() {
           {/* Left side: Logo and primary nav */}
           <div className="flex items-center gap-8">
             <Link href="/" className="flex-shrink-0 flex items-center font-bold text-xl tracking-tight text-gray-900 group">
-              <img src="/images/logo1.png" alt="Kultuuriraanits" className="w-10 h-10 object-contain mr-2" />
+              <img src="/images/logo2.png" alt="Kultuuriraanits" className="w-10 h-10 object-contain mr-2" />
               Kultuuriraanits
             </Link>
             <div className="hidden md:flex space-x-1 text-sm font-medium">

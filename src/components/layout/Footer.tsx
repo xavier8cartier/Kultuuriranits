@@ -9,7 +9,7 @@ export function Footer() {
           {/* Logo and Newsletter */}
           <div className="space-y-6">
             <Link href="/" className="flex items-center font-bold text-xl tracking-tight text-gray-900 group">
-              <img src="/images/logo1.png" alt="Kultuuriraanits" className="w-10 h-10 object-contain mr-2" />
+              <img src="/images/logo2.png" alt="Kultuuriraanits" className="w-10 h-10 object-contain mr-2" />
               Kultuuriraanits
             </Link>
             <div>

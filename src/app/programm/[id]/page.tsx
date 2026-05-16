@@ -58,8 +58,8 @@ export default async function ProgramDetailPage({ params }: PageProps) {
                   <span>{program.participantCount}</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-gray-600">
-                  <Globe className="w-4 h-4 text-green-600" />
-                  <span>{program.languages.join(', ')}</span>
+                  <Globe className="w-4 h-4 text-blue-600" />
+                  <span>{program.languages?.join(', ') || 'Eesti'}</span>
                 </div>
               </div>
 
@@ -81,7 +81,7 @@ export default async function ProgramDetailPage({ params }: PageProps) {
                 Õppekavaseos
               </h3>
               <div className="flex flex-wrap gap-2">
-                {program.curriculumConnections.map(conn => (
+                {program.curriculumConnections?.map(conn => (
                   <span key={conn} className="bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-1 rounded-full">
                     {conn}
                   </span>
@@ -118,7 +118,7 @@ export default async function ProgramDetailPage({ params }: PageProps) {
           <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm">
             <h3 className="text-lg font-bold text-gray-900 mb-4">Õppematerjalid (seotud selle programmiga)</h3>
             <div className="space-y-3">
-              {program.materials.map((mat, idx) => (
+              {program.materials?.map((mat, idx) => (
                 <div key={idx} className="flex items-center justify-between p-3 rounded-lg bg-gray-50 border border-gray-200">
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-white rounded border border-gray-200">

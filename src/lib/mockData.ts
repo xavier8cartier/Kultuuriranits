@@ -2,6 +2,32 @@ import { Program, FilterOptions } from './types';
 
 export const programs: Program[] = [
   {
+    id: 'padise-mesindus',
+    title: 'Rännak keskaega Padise kloostris. Mesindus',
+    organizer: 'Padise klooster',
+    location: 'Padise, Harjumaa',
+    image: 'https://keskkonnaharidus.ee/sites/default/files/2023-11/Screenshot%202023-11-07%20122532.jpg',
+    shortDescription: 'Haridusprogramm annab õpilasele unikaalses keskkonnas ülevaate kloostri elu-olust, selle rollist keskaegses ühiskonnas ning suhtest loodusega.',
+    fullDescription: 'Haridusprogramm “Rännak keskaega Padise kloostris. Mesindus” annab õpilasele unikaalses keskkonnas ülevaate kloostri elu-olust, selle rollist keskaegses ühiskonnas ning suhtest loodusega. Programm koosneb kahest osast - juhendatud giidituurist kloostri varemetes ning praktilisest töötoast külastuskeskuses. Giidituuri käigus saavad õpilased teada, milline oli kloostri roll keskaegses ühiskonnas, kuidas elasid mungad ja milline oli kloostri suhe ümbritseva loodusega. Praktiline töötuba on inspireeritud kloostrite traditsioonilisest mesindusest ning hõlmab nii faktide omandamist kui käelist tegevust. Grupitööna valmib kas mesilasvahast kastetud küünal või vahariie.',
+    price: '7 € / õpilane',
+    targetGroups: ['7. - 9. klass'],
+    duration: '120 min',
+    categories: ['Ajalugu', 'Loodus'],
+    participantCount: '10 - 25 õpilast',
+    languages: ['Eesti'],
+    curriculumConnections: ['Ajalugu', 'Bioloogia', 'Tehnoloogia'],
+    accessibility: {
+      wheelchair: true,
+      hev: true,
+      signLanguage: false,
+      audioDescription: false,
+    },
+    materials: [
+      { name: 'Programmi kirjeldus (PDF)', url: '#' },
+      { name: 'Tööleht õpilasele', url: '#' }
+    ]
+  },
+  {
     id: '1',
     title: 'Ajarännak minevikku',
     shortDescription: 'Õpilased avastavad mineviku elu ja tavasid läbi mänguliste ülesannete, arutelude ja praktiliste tegevuste.',
@@ -25,7 +51,7 @@ export const programs: Program[] = [
       { name: 'Tööleht_muuseum.pdf', url: '#' },
       { name: 'Õpetaja_juhend.docx', url: '#' }
     ],
-    image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070&auto=format&fit=crop'
+    image: 'https://www.kero.ee/wp-content/uploads/2017/02/DJI_0042-2.jpg'
   },
   {
     id: '2',

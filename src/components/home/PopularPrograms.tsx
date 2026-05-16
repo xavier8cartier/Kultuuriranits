@@ -1,8 +1,24 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import { programs } from '@/lib/mockData';
 import { Users, GraduationCap, Banknote, MapPin } from 'lucide-react';
 import Link from 'next/link';
 
 export function PopularPrograms() {
+  const [userRole, setUserRole] = useState<string | null>(null);
+
+  useEffect(() => {
+    const checkAuth = () => {
+      const role = localStorage.getItem('userRole');
+      setUserRole(role);
+    };
+
+    checkAuth();
+    window.addEventListener('kr-auth-change', checkAuth);
+    return () => window.removeEventListener('kr-auth-change', checkAuth);
+  }, []);
+
   // Show first 3 programs as popular
   const popularPrograms = programs.slice(0, 3);
 
@@ -69,7 +85,7 @@ export function PopularPrograms() {
                   href={`/programm/${program.id}`}
                   className="block w-full text-center py-3 rounded-xl bg-gray-50 text-gray-900 font-semibold hover:bg-green-600 hover:text-white transition-colors"
                 >
-                  Vaata lähemalt
+                  {userRole === 'teacher' ? 'Vaata detaile ja broneeri' : 'Vaata detaile'}
                 </Link>
               </div>
             </div>

@@ -46,19 +46,26 @@ export function Navbar() {
     switch (role) {
       case 'teacher': name = 'Mari Maasikas (Õpetaja)'; break;
       case 'museum': name = 'Eesti Rahva Muuseum'; break;
-      case 'admin': name = 'Admin Kasutaja'; break;
     }
     
     const newUser = { role, name };
     setUser(newUser);
     localStorage.setItem('kr_user', JSON.stringify(newUser));
+    localStorage.setItem('userRole', role);
     setIsLoginModalOpen(false);
+    
+    // Notify other components
+    window.dispatchEvent(new Event('kr-auth-change'));
   };
 
   const handleLogout = () => {
     setUser(null);
     localStorage.removeItem('kr_user');
+    localStorage.removeItem('userRole');
     setIsProfileOpen(false);
+    
+    // Notify other components
+    window.dispatchEvent(new Event('kr-auth-change'));
   };
 
   const getNavLinks = () => {
@@ -229,19 +236,6 @@ export function Navbar() {
                 <div>
                   <h3 className="font-bold text-gray-900 text-lg">Kultuuriasutus</h3>
                   <p className="text-sm text-gray-500">Halda oma muuseumi programme</p>
-                </div>
-              </button>
-
-              <button 
-                onClick={() => handleLogin('admin')}
-                className="w-full flex items-center gap-4 p-4 rounded-2xl border-2 border-gray-100 hover:border-green-500 hover:bg-green-50 transition-all group text-left"
-              >
-                <div className="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center text-gray-600 group-hover:bg-gray-800 group-hover:text-white transition-colors">
-                  <Shield className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-gray-900 text-lg">Administraator</h3>
-                  <p className="text-sm text-gray-500">Süsteemi ja kasutajate haldus</p>
                 </div>
               </button>
             </div>

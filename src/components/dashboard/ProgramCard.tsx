@@ -1,3 +1,6 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Program } from '@/lib/types';
 
@@ -6,6 +9,19 @@ interface ProgramCardProps {
 }
 
 export function ProgramCard({ program }: ProgramCardProps) {
+  const [userRole, setUserRole] = useState<string | null>(null);
+
+  useEffect(() => {
+    const checkAuth = () => {
+      const role = localStorage.getItem('userRole');
+      setUserRole(role);
+    };
+
+    checkAuth();
+    window.addEventListener('kr-auth-change', checkAuth);
+    return () => window.removeEventListener('kr-auth-change', checkAuth);
+  }, []);
+
   return (
     <div className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200 flex flex-col md:flex-row">
       <div className="md:w-1/3 lg:w-1/4 relative h-48 md:h-auto">
@@ -61,7 +77,7 @@ export function ProgramCard({ program }: ProgramCardProps) {
             href={`/programm/${program.id}`}
             className="text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline flex items-center gap-1"
           >
-            Vaata detaile ja broneeri &rarr;
+            {userRole === 'teacher' ? 'Vaata detaile ja broneeri' : 'Vaata detaile'} &rarr;
           </Link>
         </div>
       </div>

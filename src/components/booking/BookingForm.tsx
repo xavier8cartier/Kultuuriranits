@@ -17,16 +17,24 @@ export function BookingForm({ programId, pricePerStudent }: BookingFormProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const savedUser = localStorage.getItem('kr_user');
-    if (savedUser) {
-      try {
-        const user = JSON.parse(savedUser);
-        setUserRole(user.role);
-      } catch (e) {
-        console.error('Failed to parse user', e);
+    const checkAuth = () => {
+      const savedUser = localStorage.getItem('kr_user');
+      if (savedUser) {
+        try {
+          const user = JSON.parse(savedUser);
+          setUserRole(user.role);
+        } catch (e) {
+          console.error('Failed to parse user', e);
+        }
+      } else {
+        setUserRole(null);
       }
-    }
-    setIsLoading(false);
+      setIsLoading(false);
+    };
+
+    checkAuth();
+    window.addEventListener('kr-auth-change', checkAuth);
+    return () => window.removeEventListener('kr-auth-change', checkAuth);
   }, []);
 
   const availableTimes = ['10:00', '11:30', '13:00'];
@@ -45,30 +53,9 @@ export function BookingForm({ programId, pricePerStudent }: BookingFormProps) {
     return <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm animate-pulse h-64"></div>;
   }
 
-  // If not logged in at all, don't show anything (as requested)
-  if (!userRole) {
-    return null;
-  }
-
-  // If logged in but not a teacher, show the restricted message
+  // Only teachers see the booking form. Guests and Museums see nothing here.
   if (userRole !== 'teacher') {
-    return (
-      <div className="bg-white rounded-xl p-8 border border-gray-200 shadow-sm text-center relative overflow-hidden group">
-        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-32 h-32 bg-gray-50 rounded-full group-hover:scale-110 transition-transform duration-500"></div>
-        <div className="relative z-10">
-          <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-orange-50 mb-6">
-            <Lock className="h-8 w-8 text-orange-500" />
-          </div>
-          <h3 className="text-xl font-bold text-gray-900 mb-3">Broneerimine on piiratud</h3>
-          <p className="text-gray-600 mb-4 leading-relaxed">
-            Sinu praegune roll (<strong>{userRole === 'museum' ? 'Kultuuriasutus' : 'Admin'}</strong>) ei võimalda broneeringute tegemist.
-          </p>
-          <p className="text-sm text-gray-500">
-            Broneerida saavad ainult õpetajad.
-          </p>
-        </div>
-      </div>
-    );
+    return null;
   }
 
   if (isSubmitted) {

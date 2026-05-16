@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { ChevronLeft, MapPin, Clock, Users, Globe, FileText, Accessibility } from 'lucide-react';
 import { programs } from '@/lib/mockData';
 import { BookingForm } from '@/components/booking/BookingForm';
+import { ProgramDetailLayout } from '@/components/program/ProgramDetailLayout';
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -29,11 +30,8 @@ export default async function ProgramDetailPage({ params }: PageProps) {
         Tagasi otsingusse
       </Link>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
-        {/* Main Content (Left) */}
-        <div className="lg:col-span-2 space-y-8">
-          
+      <ProgramDetailLayout programId={program.id} priceValue={priceValue}>
+        <div className="space-y-8">
           {/* Header Card */}
           <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
             <div className="h-64 sm:h-80 relative">
@@ -76,7 +74,6 @@ export default async function ProgramDetailPage({ params }: PageProps) {
 
           {/* Info Sections */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
             {/* Curriculum Connections */}
             <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm">
               <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
@@ -115,7 +112,6 @@ export default async function ProgramDetailPage({ params }: PageProps) {
                 )}
               </ul>
             </div>
-
           </div>
 
           {/* Materials */}
@@ -137,17 +133,8 @@ export default async function ProgramDetailPage({ params }: PageProps) {
               ))}
             </div>
           </div>
-
         </div>
-
-        {/* Sidebar (Right) - Booking Form */}
-        <div className="lg:col-span-1">
-          <div className="sticky top-24">
-            <BookingForm programId={program.id} pricePerStudent={priceValue} />
-          </div>
-        </div>
-
-      </div>
+      </ProgramDetailLayout>
     </div>
   );
 }

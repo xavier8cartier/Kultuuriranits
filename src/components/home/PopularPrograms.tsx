@@ -29,7 +29,7 @@ export function PopularPrograms() {
           <h2 className="text-3xl font-bold text-gray-900 mb-2">Populaarsed programmid</h2>
           <p className="text-gray-600">Enim broneeritud ja kõrgelt hinnatud programmid</p>
         </div>
-        <Link href="/otsi" className="text-green-600 font-semibold hover:underline">
+        <Link href="/otsi" className="text-blue-600 font-semibold hover:underline">
           Vaata kõiki &rarr;
         </Link>
       </div>
@@ -54,7 +54,7 @@ export function PopularPrograms() {
               <div className="mb-4">
                 <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-1">{program.title}</h3>
                 <div className="flex items-center text-gray-500 text-sm gap-1 mb-1">
-                  <MapPin className="w-4 h-4 text-green-600" />
+                  <MapPin className="w-4 h-4 text-blue-600" />
                   <span className="font-medium">{program.organizer}</span>
                 </div>
               </div>
@@ -83,7 +83,7 @@ export function PopularPrograms() {
               <div className="mt-6 pt-6 border-t border-gray-50">
                 <Link 
                   href={`/programm/${program.id}`}
-                  className="block w-full text-center py-3 rounded-xl bg-gray-50 text-gray-900 font-semibold hover:bg-green-600 hover:text-white transition-colors"
+                  className="block w-full text-center py-3 rounded-xl bg-gray-50 text-gray-900 font-semibold hover:bg-blue-600 hover:text-white transition-colors"
                 >
                   {userRole === 'teacher' ? 'Vaata detaile ja broneeri' : 'Vaata detaile'}
                 </Link>

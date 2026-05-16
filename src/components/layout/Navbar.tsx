@@ -112,7 +112,7 @@ export function Navbar() {
           {/* Left side: Logo and primary nav */}
           <div className="flex items-center gap-8">
             <Link href="/" className="flex-shrink-0 flex items-center font-bold text-xl tracking-tight text-gray-900 group">
-              <div className="w-8 h-8 bg-green-600 rounded-lg mr-2 flex items-center justify-center text-xs text-white shadow-sm group-hover:bg-green-700 transition-colors">KR</div>
+              <img src="/images/logo1.png" alt="Kultuuriraanits" className="w-10 h-10 object-contain mr-2" />
               Kultuuriraanits
             </Link>
             <div className="hidden md:flex space-x-1 text-sm font-medium">
@@ -124,7 +124,7 @@ export function Navbar() {
                     href={link.href}
                     className={`px-4 py-2 rounded-full transition-all duration-200 ${
                       isActive 
-                        ? 'bg-green-50 text-green-700 font-semibold' 
+                        ? 'bg-blue-50 text-blue-700 font-semibold' 
                         : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
                     }`}
                   >
@@ -149,9 +149,9 @@ export function Navbar() {
                 <div className="relative" ref={profileRef}>
                   <button 
                     onClick={() => setIsProfileOpen(!isProfileOpen)}
-                    className="flex items-center gap-2 pl-2 pr-3 py-1.5 rounded-full border border-gray-200 hover:border-green-300 hover:bg-green-50 transition-all group"
+                    className="flex items-center gap-2 pl-2 pr-3 py-1.5 rounded-full border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all group"
                   >
-                    <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-700 group-hover:bg-green-200 transition-colors">
+                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 group-hover:bg-blue-200 transition-colors">
                       <User className="w-5 h-5" />
                     </div>
                     <span className="text-sm font-medium text-gray-700 hidden sm:block">{user.name}</span>
@@ -162,7 +162,7 @@ export function Navbar() {
                     <div className="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-50 transform origin-top-right transition-all duration-200 opacity-100 scale-100">
                       <div className="px-4 py-2 border-b border-gray-50 mb-1">
                         <p className="text-xs text-gray-400 uppercase font-bold tracking-wider">Roll</p>
-                        <p className="text-sm font-semibold text-green-700 capitalize">
+                        <p className="text-sm font-semibold text-blue-700 capitalize">
                           {user.role === 'teacher' ? 'Õpetaja' : user.role === 'museum' ? 'Muuseum' : 'Admin'}
                         </p>
                       </div>
@@ -180,7 +180,7 @@ export function Navbar() {
             ) : (
               <button 
                 onClick={() => setIsLoginModalOpen(true)}
-                className="bg-green-600 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-green-700 transition-all shadow-md hover:shadow-lg flex items-center gap-2 transform active:scale-95"
+                className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition-all shadow-md hover:shadow-lg flex items-center gap-2 transform active:scale-95"
               >
                 <User className="w-4 h-4" />
                 Logi sisse
@@ -201,7 +201,7 @@ export function Navbar() {
           
           {/* Modal Content */}
           <div className="relative bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden transform transition-all duration-300 scale-100 opacity-100">
-            <div className="bg-green-600 p-8 text-white relative">
+            <div className="bg-blue-600 p-8 text-white relative">
               <button 
                 onClick={() => setIsLoginModalOpen(false)}
                 className="absolute top-4 right-4 p-2 hover:bg-white/10 rounded-full transition-colors"
@@ -209,13 +209,13 @@ export function Navbar() {
                 <X className="w-5 h-5" />
               </button>
               <h2 className="text-2xl font-bold mb-2">Tere tulemast!</h2>
-              <p className="text-green-100 opacity-90">Vali oma roll, et jätkata Kultuuriranitsa kasutamist.</p>
+              <p className="text-blue-100 opacity-90">Vali oma roll, et jätkata Kultuuriranitsa kasutamist.</p>
             </div>
             
             <div className="p-6 space-y-3">
               <button 
                 onClick={() => handleLogin('teacher')}
-                className="w-full flex items-center gap-4 p-4 rounded-2xl border-2 border-gray-100 hover:border-green-500 hover:bg-green-50 transition-all group text-left"
+                className="w-full flex items-center gap-4 p-4 rounded-2xl border-2 border-gray-100 hover:border-blue-500 hover:bg-blue-50 transition-all group text-left"
               >
                 <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                   <School className="w-6 h-6" />
@@ -228,7 +228,7 @@ export function Navbar() {
 
               <button 
                 onClick={() => handleLogin('museum')}
-                className="w-full flex items-center gap-4 p-4 rounded-2xl border-2 border-gray-100 hover:border-green-500 hover:bg-green-50 transition-all group text-left"
+                className="w-full flex items-center gap-4 p-4 rounded-2xl border-2 border-gray-100 hover:border-blue-500 hover:bg-blue-50 transition-all group text-left"
               >
                 <div className="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600 group-hover:bg-orange-600 group-hover:text-white transition-colors">
                   <Landmark className="w-6 h-6" />

@@ -23,6 +23,18 @@ export interface Program {
     url: string;
   }[];
   image: string;
+  contactEmail?: string;
+  contactPhone?: string;
+  reviews?: Review[];
+}
+
+export interface Review {
+  id: string;
+  authorName: string;
+  authorSchool: string;
+  rating: number; // 1 to 5
+  comment: string;
+  date: string;
 }
 
 export interface Booking {

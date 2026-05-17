@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ChevronLeft, MapPin, Clock, Users, Globe, FileText, Accessibility } from 'lucide-react';
+import { ChevronLeft, MapPin, Clock, Users, Globe, FileText, Accessibility, Mail, Phone } from 'lucide-react';
 import { programs } from '@/lib/mockData';
 import { BookingForm } from '@/components/booking/BookingForm';
 import { ProgramDetailLayout } from '@/components/program/ProgramDetailLayout';
+import { FeedbackSection } from '@/components/program/FeedbackSection';
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -133,6 +134,49 @@ export default async function ProgramDetailPage({ params }: PageProps) {
               ))}
             </div>
           </div>
+
+          {/* Kontakt */}
+          {(program.contactEmail || program.contactPhone) && (
+            <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm">
+              <h3 className="text-lg font-bold text-gray-900 mb-4">Kontakt</h3>
+              <div className="space-y-3">
+                {program.contactEmail && (
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-gray-50 border border-gray-200">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-white rounded border border-gray-200 shrink-0">
+                        <Mail className="w-4 h-4 text-gray-400" />
+                      </div>
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                        <span className="text-sm font-medium text-gray-500">E-post:</span>
+                        <a href={`mailto:${program.contactEmail}`} className="text-sm font-semibold text-blue-600 hover:text-blue-800 hover:underline break-all">
+                          {program.contactEmail}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
+                {program.contactPhone && (
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-gray-50 border border-gray-200">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-white rounded border border-gray-200 shrink-0">
+                        <Phone className="w-4 h-4 text-gray-400" />
+                      </div>
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                        <span className="text-sm font-medium text-gray-500">Telefon:</span>
+                        <a href={`tel:${program.contactPhone}`} className="text-sm font-semibold text-blue-600 hover:text-blue-800 hover:underline">
+                          {program.contactPhone}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Tagasiside sektsioon (nähtav vaid logitud koolidele/muuseumitele) */}
+          <FeedbackSection reviews={program.reviews} />
         </div>
       </ProgramDetailLayout>
     </div>

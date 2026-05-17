@@ -9,7 +9,7 @@ export const programs: Program[] = [
     image: 'https://keskkonnaharidus.ee/sites/default/files/2023-11/Screenshot%202023-11-07%20122532.jpg',
     shortDescription: 'Haridusprogramm annab õpilasele unikaalses keskkonnas ülevaate kloostri elu-olust, selle rollist keskaegses ühiskonnas ning suhtest loodusega.',
     fullDescription: 'Haridusprogramm “Rännak keskaega Padise kloostris. Mesindus” annab õpilasele unikaalses keskkonnas ülevaate kloostri elu-olust, selle rollist keskaegses ühiskonnas ning suhtest loodusega. Programm koosneb kahest osast - juhendatud giidituurist kloostri varemetes ning praktilisest töötoast külastuskeskuses. Giidituuri käigus saavad õpilased teada, milline oli kloostri roll keskaegses ühiskonnas, kuidas elasid mungad ja milline oli kloostri suhe ümbritseva loodusega. Praktiline töötuba on inspireeritud kloostrite traditsioonilisest mesindusest ning hõlmab nii faktide omandamist kui käelist tegevust. Grupitööna valmib kas mesilasvahast kastetud küünal või vahariie.',
-    price: '7 € / õpilane',
+    price: '7€',
     targetGroups: ['7. - 9. klass'],
     duration: '120 min',
     categories: ['Ajalugu', 'Loodus'],
@@ -25,6 +25,42 @@ export const programs: Program[] = [
     materials: [
       { name: 'Programmi kirjeldus (PDF)', url: '#' },
       { name: 'Tööleht õpilasele', url: '#' }
+    ],
+    contactEmail: 'info@padiseklooster.ee',
+    contactPhone: '+372 5811 8119',
+    reviews: [
+      {
+        id: 'r1',
+        authorName: 'Tiina Tamm',
+        authorSchool: 'Keila Kool',
+        rating: 5,
+        comment: 'Suurepärane programm! Lapsed olid vaimustuses praktilisest küünla valmistamise töötoast. Giid rääkis väga kaasahaaravalt ja oskas hoida ka kõige rahutumate õpilaste tähelepanu.',
+        date: '12.04.2026'
+      },
+      {
+        id: 'r2',
+        authorName: 'Andres Kask',
+        authorSchool: 'Tallinna Reaalkool',
+        rating: 4,
+        comment: 'Väga põhjalik ajalooline ülevaade. Töölehed olid hästi ette valmistatud. Ainus miinus oli see, et kloostri varemetes oli veidi külm, seega soovitame soojalt riidesse panna.',
+        date: '05.05.2026'
+      },
+      {
+        id: 'r3',
+        authorName: 'Katrin Koppel',
+        authorSchool: 'Saue Gümnaasium',
+        rating: 5,
+        comment: 'Väga õnnestunud lõiming bioloogia ja ajaloo vahel. Õpilased said ise proovida vahasid ja küünla valmistamist. Kindlasti tuleme ka järgmisel aastal!',
+        date: '18.04.2026'
+      },
+      {
+        id: 'r4',
+        authorName: 'Jaanus Nõmm',
+        authorSchool: 'Tabasalu Gümnaasium',
+        rating: 5,
+        comment: 'Kogu protsess broneerimisest kuni kohapealse tegevuseni oli sujuv. Eelarve arveldamine toimus automaatselt, mis tegi paberimajanduse olematuks. Giid oli oma ala ekspert!',
+        date: '22.04.2026'
+      }
     ]
   },
   {
@@ -51,7 +87,27 @@ export const programs: Program[] = [
       { name: 'Tööleht_muuseum.pdf', url: '#' },
       { name: 'Õpetaja_juhend.docx', url: '#' }
     ],
-    image: 'https://www.kero.ee/wp-content/uploads/2017/02/DJI_0042-2.jpg'
+    image: 'https://www.kero.ee/wp-content/uploads/2017/02/DJI_0042-2.jpg',
+    contactEmail: 'haridus@erm.ee',
+    contactPhone: '+372 736 3050',
+    reviews: [
+      {
+        id: 'r3',
+        authorName: 'Kadri Sepp',
+        authorSchool: 'Tartu Karlova Kool',
+        rating: 5,
+        comment: 'Ajarännak oli suurepärane! ERMi rikkalikud ekspositsioonid ja suurepärased giidid pakkusid unustamatu kogemuse. Tulime tagasi väga positiivsete emotsioonidega.',
+        date: '28.04.2026'
+      },
+      {
+        id: 'r4',
+        authorName: 'Mihkel Lember',
+        authorSchool: 'Pärnu Ühisgümnaasium',
+        rating: 5,
+        comment: 'Väga kaasahaaravad tegevused ja rühmatööd. Programm sidus imehästi ajaloo- ja ühiskonnaõpetuse teemasid. Soovitame kindlasti!',
+        date: '14.05.2026'
+      }
+    ]
   },
   {
     id: '2',
@@ -76,7 +132,19 @@ export const programs: Program[] = [
     materials: [
       { name: 'Orienteerumiskaart.pdf', url: '#' }
     ],
-    image: 'https://linnamuuseum.ee/wp-content/uploads/2022/06/katk2.png'
+    image: 'https://linnamuuseum.ee/wp-content/uploads/2022/06/katk2.png',
+    contactEmail: 'haridus@linnamuuseum.ee',
+    contactPhone: '+372 615 5184',
+    reviews: [
+      {
+        id: 'r5',
+        authorName: 'Helen Mägi',
+        authorSchool: 'Jüri Gümnaasium',
+        rating: 4,
+        comment: 'Seiklusmäng vanalinnas oli põnev ja pani meeskonnatöö proovile. Kuna liikusime palju väljas, siis sobib pigem kuivema ilmaga külastuseks.',
+        date: '10.05.2026'
+      }
+    ]
   },
   {
     id: '3',
@@ -102,7 +170,19 @@ export const programs: Program[] = [
       { name: 'Kunkumoori_laul.mp3', url: '#' },
       { name: 'Varjuteatri_tegemise_juhend.pdf', url: '#' }
     ],
-    image: 'https://www.sudalinnateater.ee/storage/images/_thumbs/pub_th2/baba-mora.png'
+    image: 'https://www.sudalinnateater.ee/storage/images/_thumbs/pub_th2/baba-mora.png',
+    contactEmail: 'kassa@eestinoorsooteater.ee',
+    contactPhone: '+372 667 9300',
+    reviews: [
+      {
+        id: 'r6',
+        authorName: 'Piret Kukk',
+        authorSchool: 'Tallinna Kesklinna Lasteaed',
+        rating: 5,
+        comment: 'Lastele väga meeldis nukuetendus! Nad elasid kogu hingega kaasa. Töötuba pärast etendust oli äärmiselt õpetlik ja arendas loovust.',
+        date: '02.05.2026'
+      }
+    ]
   }
 ];
 

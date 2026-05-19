@@ -1,4 +1,4 @@
-import { Program, FilterOptions } from './types';
+import { Program, FilterOptions, Notification } from './types';
 
 export const programs: Program[] = [
   {
@@ -200,3 +200,48 @@ export const mockFilters: FilterOptions = {
   regions: ['Tallinn', 'Harjumaa', 'Tartu', 'Tartumaa', 'Pärnu', 'Ida-Virumaa', 'Üle-eestiline (veebis)'],
   accessibility: ['Ratastooliga ligipääs', 'HEV õppijatele sobiv', 'Viipekeel', 'Helisalvestus']
 };
+
+export const defaultNotifications: Notification[] = [
+  {
+    id: 'n1',
+    title: 'Programmi "Ajarännak minevikku" 26.05 kell 12.00 broneering tühistati',
+    content: 'Pärnu Ülejõe Kool tühistas broneeringu programmi "Ajarännak minevikku" ajale 26.05 kell 12.00. Tühistamise põhjus: transpordi puudumine (kooli bussirike). Soovivad uut aega broneerida esimesel võimalusel.',
+    sender: 'Pärnu Ülejõe Kool',
+    date: '29.04.2026',
+    time: '14:22',
+    bookingDate: '26.05 kell 12.00',
+    broneerija: 'Pärnu Ülejõe Kool, Õpetaja Kaire Kukk',
+    studentsCount: 22,
+    location: 'Eesti Rahva Muuseum',
+    isRead: false,
+    type: 'cancel'
+  },
+  {
+    id: 'n2',
+    title: 'Õpetaja lisas tagasiside programmile "Ajarännak minevikku"',
+    content: 'Õpetaja Mihkel Lember koolist Tallinna Ühisgümnaasium lisas uue tagasiside teie programmile.\nHinnang: 5/5 tähte.\nTagasiside sisu: "Väga kaasahaaravad tegevused ja rühmatööd. Programm sidus imehästi ajaloo- ja ühiskonnasuundi. Soovitame kindlasti!"',
+    sender: 'Tallinna Ühisgümnaasium',
+    date: '23.04.2026',
+    time: '16:05',
+    bookingDate: '14.05.2026',
+    broneerija: 'Tallinna Ühisgümnaasium, Õpetaja Mihkel Lember',
+    studentsCount: 28,
+    location: 'Eesti Rahva Muuseum',
+    isRead: true,
+    type: 'feedback'
+  },
+  {
+    id: 'n3',
+    title: 'Uus broneering programmile "Ajarännak minevikku" 21.05 kell 13.00',
+    content: 'Teie programmile „Ajarännak minevikku“ on tehtud uus broneering.',
+    sender: 'Viljandi Kesklinna Kool',
+    date: '23.04.2026',
+    time: '11:15',
+    bookingDate: '21.05 kell 13.00',
+    broneerija: 'Viljandi Kesklinna Kool, Õpetaja Liis Tamm',
+    studentsCount: 25,
+    location: 'Eesti Rahva Muuseum',
+    isRead: false,
+    type: 'booking'
+  }
+];

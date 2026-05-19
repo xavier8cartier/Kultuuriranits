@@ -19,7 +19,40 @@ export function Navbar() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isAccessOpen, setIsAccessOpen] = useState(false);
   const [contrastTheme, setContrastTheme] = useState<'default' | 'high-contrast'>('default');
+  const [unreadNotifications, setUnreadNotifications] = useState(0);
   const profileRef = useRef<HTMLDivElement>(null);
+
+  // Load unread notifications count from localStorage
+  const updateUnreadNotifications = () => {
+    const saved = localStorage.getItem('kr_notifications');
+    if (saved) {
+      try {
+        const notifications = JSON.parse(saved);
+        const count = notifications.filter((n: any) => !n.isRead).length;
+        setUnreadNotifications(count);
+      } catch (e) {
+        console.error('Failed to parse notifications', e);
+      }
+    } else {
+      setUnreadNotifications(2);
+    }
+  };
+
+  useEffect(() => {
+    updateUnreadNotifications();
+
+    const handleNotificationsChange = () => {
+      updateUnreadNotifications();
+    };
+
+    window.addEventListener('kr-notifications-updated', handleNotificationsChange);
+    window.addEventListener('kr-auth-change', updateUnreadNotifications);
+
+    return () => {
+      window.removeEventListener('kr-notifications-updated', handleNotificationsChange);
+      window.removeEventListener('kr-auth-change', updateUnreadNotifications);
+    };
+  }, []);
 
   // Load user from localStorage on mount
   useEffect(() => {
@@ -114,7 +147,7 @@ export function Navbar() {
         return [
           ...common,
           { name: 'Töölaud', href: '/toolaud' },
-          { name: 'Teated', href: '#' },
+          { name: 'Teated', href: '/teated' },
           { name: 'Kultuuriprogrammid', href: '/otsi' },
         ];
       case 'admin':
@@ -167,16 +200,22 @@ export function Navbar() {
             <div className="hidden md:flex space-x-1 text-sm font-medium">
               {navLinks.map((link) => {
                 const isActive = pathname === link.href;
+                const isTeated = link.href === '/teated';
                 return (
                   <Link
                     key={link.name}
                     href={link.href}
-                    className={`px-4 py-2 rounded-full transition-all duration-200 ${isActive
+                    className={`px-4 py-2 rounded-full transition-all duration-200 flex items-center gap-1.5 ${isActive
                         ? 'bg-blue-50 text-blue-700 font-semibold'
                         : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
                       }`}
                   >
-                    {link.name}
+                    <span>{link.name}</span>
+                    {isTeated && unreadNotifications > 0 && (
+                      <span className="bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center">
+                        {unreadNotifications}
+                      </span>
+                    )}
                   </Link>
                 );
               })}
@@ -187,10 +226,18 @@ export function Navbar() {
           <div className="flex items-center gap-3">
             {user ? (
               <>
-                <button className="p-2 text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors relative">
+                <Link
+                  href="/teated"
+                  className="p-2 text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors relative flex items-center justify-center"
+                  aria-label="Teadete leht"
+                >
                   <Bell className="w-5 h-5" />
-                  <span className="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
-                </button>
+                  {unreadNotifications > 0 && (
+                    <span className="absolute top-1 right-1 bg-red-500 text-white text-[9px] font-bold flex items-center justify-center min-w-[16px] h-4 px-1 rounded-full border border-white">
+                      {unreadNotifications}
+                    </span>
+                  )}
+                </Link>
 
                 <div className="h-6 w-px bg-gray-200 mx-1"></div>
 

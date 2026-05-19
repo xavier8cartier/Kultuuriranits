@@ -61,3 +61,19 @@ export interface FilterOptions {
   regions: string[];
   accessibility: string[];
 }
+
+export interface Notification {
+  id: string;
+  title: string;
+  content: string;
+  sender: string;
+  date: string;
+  time?: string;
+  bookingDate?: string;
+  broneerija?: string;
+  studentsCount?: number;
+  location?: string;
+  isRead: boolean;
+  type: 'cancel' | 'feedback' | 'booking' | 'system';
+}
+

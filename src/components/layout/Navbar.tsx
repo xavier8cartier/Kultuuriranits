@@ -113,7 +113,7 @@ export function Navbar() {
       case 'museum':
         return [
           ...common,
-          { name: 'Töölaud', href: '#' },
+          { name: 'Töölaud', href: '/toolaud' },
           { name: 'Teated', href: '#' },
           { name: 'Kultuuriprogrammid', href: '/otsi' },
         ];

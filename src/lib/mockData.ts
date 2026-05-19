@@ -28,6 +28,8 @@ export const programs: Program[] = [
     ],
     contactEmail: 'info@padiseklooster.ee',
     contactPhone: '+372 5811 8119',
+    bookingMethod: 'platform',
+    availableTimes: ['2026-05-15 10:00', '2026-05-15 13:00', '2026-05-22 11:00'],
     reviews: [
       {
         id: 'r1',
@@ -90,6 +92,8 @@ export const programs: Program[] = [
     image: 'https://www.kero.ee/wp-content/uploads/2017/02/DJI_0042-2.jpg',
     contactEmail: 'haridus@erm.ee',
     contactPhone: '+372 736 3050',
+    bookingMethod: 'platform',
+    availableTimes: ['2026-05-15 09:00', '2026-05-15 11:00', '2026-05-15 13:00', '2026-05-15 15:00'],
     reviews: [
       {
         id: 'r3',
@@ -135,6 +139,8 @@ export const programs: Program[] = [
     image: 'https://linnamuuseum.ee/wp-content/uploads/2022/06/katk2.png',
     contactEmail: 'haridus@linnamuuseum.ee',
     contactPhone: '+372 615 5184',
+    bookingMethod: 'contact',
+    availableTimes: [],
     reviews: [
       {
         id: 'r5',
@@ -173,6 +179,8 @@ export const programs: Program[] = [
     image: 'https://www.sudalinnateater.ee/storage/images/_thumbs/pub_th2/baba-mora.png',
     contactEmail: 'kassa@eestinoorsooteater.ee',
     contactPhone: '+372 667 9300',
+    bookingMethod: 'contact',
+    availableTimes: [],
     reviews: [
       {
         id: 'r6',

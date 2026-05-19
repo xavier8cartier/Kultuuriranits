@@ -26,6 +26,14 @@ export interface Program {
   contactEmail?: string;
   contactPhone?: string;
   reviews?: Review[];
+  minGroupSize?: number;
+  maxGroupSize?: number;
+  county?: string;
+  address?: string;
+  outdoor?: boolean;
+  additionalInfo?: string;
+  bookingMethod?: 'platform' | 'contact';
+  availableTimes?: string[];
 }
 
 export interface Review {

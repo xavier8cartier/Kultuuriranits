@@ -19,8 +19,14 @@ export default function RootLayout({
   return (
     <html lang="et" className="h-full antialiased bg-gray-50">
       <body className={`${inter.className} min-h-full flex flex-col`}>
+        <a 
+          href="#main-content" 
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-blue-600 focus:text-white focus:px-4 focus:py-3 focus:rounded-xl focus:shadow-xl focus:font-bold focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          Liigu edasi põhisisu juurde
+        </a>
         <Navbar />
-        <main className="flex-1">
+        <main id="main-content" className="flex-1 focus:outline-none">
           {children}
         </main>
         <Footer />

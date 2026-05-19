@@ -33,4 +33,136 @@ body {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  
+  .animate-slide-in {
+    animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+}
+
+/* High Contrast Mode - Must ja Kollane */
+html.high-contrast {
+  color-scheme: dark !important;
+}
+
+html.high-contrast body,
+html.high-contrast header,
+html.high-contrast footer,
+html.high-contrast nav,
+html.high-contrast div,
+html.high-contrast section,
+html.high-contrast main,
+html.high-contrast aside,
+html.high-contrast article,
+html.high-contrast ul,
+html.high-contrast ol,
+html.high-contrast li {
+  background-color: #000000 !important;
+  background-image: none !important;
+  color: #ffff00 !important;
+  box-shadow: none !important;
+}
+
+html.high-contrast p,
+html.high-contrast h1,
+html.high-contrast h2,
+html.high-contrast h3,
+html.high-contrast h4,
+html.high-contrast h5,
+html.high-contrast h6,
+html.high-contrast span,
+html.high-contrast label,
+html.high-contrast input,
+html.high-contrast select,
+html.high-contrast textarea,
+html.high-contrast td,
+html.high-contrast th,
+html.high-contrast dt,
+html.high-contrast dd,
+html.high-contrast kbd,
+html.high-contrast strong {
+  color: #ffff00 !important;
+  background-color: #000000 !important;
+}
+
+/* Links & Buttons in high contrast */
+html.high-contrast a,
+html.high-contrast button {
+  color: #ffff00 !important;
+  background-color: #000000 !important;
+  border: 2px solid #ffff00 !important;
+  text-decoration: underline !important;
+  box-shadow: none !important;
+}
+
+html.high-contrast a:hover,
+html.high-contrast button:hover,
+html.high-contrast a:focus,
+html.high-contrast button:focus {
+  color: #000000 !important;
+  background-color: #ffff00 !important;
+  text-decoration: none !important;
+}
+
+/* Form Controls */
+html.high-contrast input[type="text"],
+html.high-contrast input[type="search"],
+html.high-contrast input[type="email"],
+html.high-contrast input[type="password"],
+html.high-contrast select,
+html.high-contrast textarea {
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+  border: 2px solid #ffff00 !important;
+  border-radius: 4px !important;
+}
+
+/* Radio & Checkboxes */
+html.high-contrast input[type="radio"],
+html.high-contrast input[type="checkbox"] {
+  accent-color: #ffff00 !important;
+  border: 2px solid #ffff00 !important;
+  background-color: #000000 !important;
+}
+
+/* Borders */
+html.high-contrast *,
+html.high-contrast *:before,
+html.high-contrast *:after {
+  border-color: #ffff00 !important;
+}
+
+/* SVG icons */
+html.high-contrast svg {
+  stroke: #ffff00 !important;
+  fill: none !important;
+}
+html.high-contrast svg path,
+html.high-contrast svg circle,
+html.high-contrast svg rect,
+html.high-contrast svg line,
+html.high-contrast svg polyline,
+html.high-contrast svg polygon {
+  stroke: #ffff00 !important;
+}
+html.high-contrast button:hover svg,
+html.high-contrast a:hover svg,
+html.high-contrast button:hover svg *,
+html.high-contrast a:hover svg * {
+  stroke: #000000 !important;
+}
+
+/* Images & videos in high contrast */
+html.high-contrast img,
+html.high-contrast video {
+  filter: grayscale(100%) contrast(150%) !important;
+  opacity: 0.8 !important;
 }

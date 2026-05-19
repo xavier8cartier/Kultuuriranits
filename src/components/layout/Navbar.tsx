@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { User, Bell, LogOut, ChevronDown, X, Shield, School, Landmark } from 'lucide-react';
+import { User, Bell, LogOut, ChevronDown, X, Shield, School, Landmark, PersonStanding, ExternalLink } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
 type UserRole = 'guest' | 'teacher' | 'museum' | 'admin';
@@ -17,6 +17,8 @@ export function Navbar() {
   const [user, setUser] = useState<UserInfo | null>(null);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isAccessOpen, setIsAccessOpen] = useState(false);
+  const [contrastTheme, setContrastTheme] = useState<'default' | 'high-contrast'>('default');
   const profileRef = useRef<HTMLDivElement>(null);
 
   // Load user from localStorage on mount
@@ -40,6 +42,28 @@ export function Navbar() {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  // Load accessibility contrast theme on mount
+  useEffect(() => {
+    const savedContrast = localStorage.getItem('kr_contrast_theme');
+    if (savedContrast === 'high-contrast') {
+      setContrastTheme('high-contrast');
+      document.documentElement.classList.add('high-contrast');
+    } else {
+      setContrastTheme('default');
+      document.documentElement.classList.remove('high-contrast');
+    }
+  }, []);
+
+  const handleContrastChange = (theme: 'default' | 'high-contrast') => {
+    setContrastTheme(theme);
+    localStorage.setItem('kr_contrast_theme', theme);
+    if (theme === 'high-contrast') {
+      document.documentElement.classList.add('high-contrast');
+    } else {
+      document.documentElement.classList.remove('high-contrast');
+    }
+  };
 
   const handleLogin = (role: UserRole) => {
     let name = '';
@@ -107,10 +131,34 @@ export function Navbar() {
 
   return (
     <nav className="border-b border-gray-200 bg-white sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
+      <div className="w-full px-4 sm:px-6 lg:px-8 relative">
+        {/* Juurdepääsetavus Button: Absolute-positioned on the far left of the viewport */}
+        <div className="absolute left-4 top-1/2 -translate-y-1/2 z-10 hidden lg:block">
+          <button 
+            onClick={() => setIsAccessOpen(true)}
+            className="flex items-center gap-2 px-3 py-2 rounded-full text-sm font-semibold text-gray-700 hover:text-blue-700 hover:bg-blue-50 border border-gray-200 transition-all cursor-pointer shrink-0 shadow-xs"
+            aria-label="Juurdepääsetavuse seaded"
+          >
+            <PersonStanding className="w-5 h-5 text-blue-600 shrink-0" />
+            <span>Juurdepääsetavus</span>
+          </button>
+        </div>
+
+        {/* Centered main container: Aligns perfectly with standard page layout max-w-7xl mx-auto */}
+        <div className="max-w-7xl mx-auto flex justify-between h-16 items-center">
           {/* Left side: Logo and primary nav */}
           <div className="flex items-center gap-8">
+            {/* Show button in normal flow only on mobile/tablet to avoid overlapping */}
+            <div className="lg:hidden">
+              <button 
+                onClick={() => setIsAccessOpen(true)}
+                className="flex items-center gap-2 px-2.5 py-1.5 rounded-full text-sm font-semibold text-gray-700 hover:text-blue-700 hover:bg-blue-50 border border-gray-200 transition-all cursor-pointer shrink-0"
+                aria-label="Juurdepääsetavuse seaded"
+              >
+                <PersonStanding className="w-5 h-5 text-blue-600 shrink-0" />
+              </button>
+            </div>
+
             <Link href="/" className="flex-shrink-0 flex items-center font-bold text-xl tracking-tight text-gray-900 group">
               <img src="/images/logo2.png" alt="Kultuuriraanits" className="w-10 h-10 object-contain mr-2" />
               Kultuuriraanits
@@ -242,6 +290,125 @@ export function Navbar() {
             
             <div className="p-6 bg-gray-50 border-t border-gray-100 flex justify-center">
               <p className="text-xs text-gray-400">See on demo-sisselogimine. Parooli ei ole vaja.</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Accessibility Drawer Panel */}
+      {isAccessOpen && (
+        <div className="fixed inset-0 z-[100] flex justify-end">
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-black/40 backdrop-blur-xs transition-opacity duration-300"
+            onClick={() => setIsAccessOpen(false)}
+          ></div>
+          
+          {/* Drawer content */}
+          <div className="relative w-full max-w-md bg-white h-full shadow-2xl flex flex-col z-10 border-l border-gray-100 animate-slide-in overflow-y-auto">
+            {/* Header */}
+            <div className="p-6 border-b border-gray-100 flex items-center justify-between bg-gray-50">
+              <div className="flex items-center gap-2.5">
+                <PersonStanding className="w-6 h-6 text-blue-600" />
+                <h2 className="text-xl font-bold text-gray-900">Juurdepääsetavus</h2>
+              </div>
+              <button 
+                onClick={() => setIsAccessOpen(false)}
+                className="p-2 hover:bg-gray-200 rounded-full transition-colors text-gray-500 hover:text-gray-900 cursor-pointer"
+                aria-label="Sule paneel"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="p-6 flex-1 space-y-6">
+              {/* Introduction Card */}
+              <div className="bg-blue-50 border border-blue-100 rounded-2xl p-5">
+                <p className="text-sm text-blue-950 leading-relaxed mb-4">
+                  Lehe loomisel on peetud silmas, et siin avaldatav info oleks kättesaadav ja kasutatav võimalikult paljudele inimestele.
+                </p>
+                <Link 
+                  href="/juurdepaasetavus" 
+                  target="_blank"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-700 hover:text-blue-900 underline"
+                  onClick={() => setIsAccessOpen(false)}
+                >
+                  Rohkem infot juurdepääsetavuse kohta on leitav siit (avaneb uues vahekaardis)
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+
+              {/* Contrast Section */}
+              <div className="space-y-3">
+                <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider">Kontrast</h3>
+                <div className="space-y-3">
+                  {/* Default Contrast */}
+                  <label className={`flex items-center justify-between p-4 rounded-2xl border-2 cursor-pointer transition-all ${contrastTheme === 'default' ? 'border-blue-600 bg-blue-50/50' : 'border-gray-100 hover:border-gray-200 bg-white'}`}>
+                    <div className="flex items-center gap-3">
+                      <input 
+                        type="radio" 
+                        name="contrast-theme" 
+                        value="default"
+                        checked={contrastTheme === 'default'}
+                        onChange={() => handleContrastChange('default')}
+                        className="w-4 h-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+                      />
+                      <div>
+                        <span className="block font-semibold text-gray-900 text-sm">Vaikimisi seaded</span>
+                        <span className="block text-xs text-gray-500">Tavaline kujundus ja värvid</span>
+                      </div>
+                    </div>
+                    <div className="w-10 h-6 rounded bg-gray-100 border border-gray-200 flex items-center justify-center text-[10px] text-gray-600 font-bold shrink-0">Aa</div>
+                  </label>
+
+                  {/* Black & Yellow Contrast */}
+                  <label className={`flex items-center justify-between p-4 rounded-2xl border-2 cursor-pointer transition-all ${contrastTheme === 'high-contrast' ? 'border-yellow-400 bg-gray-900 text-yellow-400' : 'border-gray-100 hover:border-gray-200 bg-white'}`}>
+                    <div className="flex items-center gap-3">
+                      <input 
+                        type="radio" 
+                        name="contrast-theme" 
+                        value="high-contrast"
+                        checked={contrastTheme === 'high-contrast'}
+                        onChange={() => handleContrastChange('high-contrast')}
+                        className="w-4 h-4 text-yellow-400 focus:ring-yellow-400 border-gray-300"
+                      />
+                      <div>
+                        <span className={`block font-semibold text-sm ${contrastTheme === 'high-contrast' ? 'text-yellow-400' : 'text-gray-900'}`}>Must ja kollane tekst</span>
+                        <span className={`block text-xs ${contrastTheme === 'high-contrast' ? 'text-yellow-300/80' : 'text-gray-500'}`}>Kõrgkontrastne vaade vaegnägijatele</span>
+                      </div>
+                    </div>
+                    <div className="w-10 h-6 rounded bg-black border border-yellow-400 flex items-center justify-center text-[10px] text-yellow-400 font-bold shrink-0">Aa</div>
+                  </label>
+                </div>
+              </div>
+
+              {/* Text Size Section */}
+              <div className="space-y-3">
+                <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider">Teksti suurus</h3>
+                <div className="bg-gray-50 rounded-2xl p-4 border border-gray-100 text-xs text-gray-600 leading-relaxed space-y-2">
+                  <p>
+                    Kõikides populaarsetes veebilehitsejates on võimalik lehte suurendada ja vähendada, kui hoida all 
+                    <kbd className="px-1.5 py-0.5 mx-0.5 text-[10px] font-semibold text-gray-800 bg-white border border-gray-200 rounded shadow-xs">Ctrl</kbd> klahvi 
+                    (OS X operatsioonisüsteemis <kbd className="px-1.5 py-0.5 mx-0.5 text-[10px] font-semibold text-gray-800 bg-white border border-gray-200 rounded shadow-xs">Cmd</kbd>) 
+                    ja samal ajal vajutada kas <kbd className="px-1.5 py-0.5 text-[10px] font-semibold text-gray-800 bg-white border border-gray-200 rounded shadow-xs">+</kbd> või 
+                    <kbd className="px-1.5 py-0.5 text-[10px] font-semibold text-gray-800 bg-white border border-gray-200 rounded shadow-xs">-</kbd> klahvi.
+                  </p>
+                  <p>
+                    Teine mugav võimalus on kasutada hiurt: hoides all <kbd className="px-1.5 py-0.5 mx-0.5 text-[10px] font-semibold text-gray-800 bg-white border border-gray-200 rounded shadow-xs">Ctrl</kbd> klahvi ja samal ajal liigutades hiire kerimisrulli.
+                  </p>
+                  <p>
+                    Tagasi normaalsuurusesse saab, kui vajutada samaaegselt <kbd className="px-1.5 py-0.5 mx-0.5 text-[10px] font-semibold text-gray-800 bg-white border border-gray-200 rounded shadow-xs">Ctrl</kbd> ja <kbd className="px-1.5 py-0.5 mx-0.5 text-[10px] font-semibold text-gray-800 bg-white border border-gray-200 rounded shadow-xs">0</kbd> klahvile.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="p-4 bg-gray-50 border-t border-gray-100 flex justify-center text-center">
+              <p className="text-[10px] text-gray-400">
+                Vastab EN 301 549 juurdepääsetavuse suunistele
+              </p>
             </div>
           </div>
         </div>

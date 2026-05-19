@@ -9,8 +9,8 @@ export function Footer() {
           {/* Logo and Newsletter */}
           <div className="space-y-6">
             <Link href="/" className="flex items-center font-bold text-xl tracking-tight text-gray-900 group">
-              <img src="/images/logo2.png" alt="Kultuuriraanits" className="w-10 h-10 object-contain mr-2" />
-              Kultuuriraanits
+              <img src="/images/logo2.png" alt="Kultuuriranits" className="w-10 h-10 object-contain mr-2" />
+              Kultuuriranits
             </Link>
             <div>
               <h4 className="font-bold text-gray-900 mb-2">Püsi kursis!</h4>
@@ -82,7 +82,7 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-400">
-          <p>© {new Date().getFullYear()} Kultuuriraanits. Kõik õigused kaitstud.</p>
+          <p>© {new Date().getFullYear()} Kultuuriranits. Kõik õigused kaitstud.</p>
           <div className="flex items-center gap-6">
             <span>Haridus- ja Teadusministeerium</span>
             <span>Kultuuriministeerium</span>

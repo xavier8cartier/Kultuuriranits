@@ -71,13 +71,13 @@ export function Navbar() {
       case 'teacher': name = 'Mari Maasikas (Õpetaja)'; break;
       case 'museum': name = 'Eesti Rahva Muuseum'; break;
     }
-    
+
     const newUser = { role, name };
     setUser(newUser);
     localStorage.setItem('kr_user', JSON.stringify(newUser));
     localStorage.setItem('userRole', role);
     setIsLoginModalOpen(false);
-    
+
     // Notify other components
     window.dispatchEvent(new Event('kr-auth-change'));
   };
@@ -87,14 +87,14 @@ export function Navbar() {
     localStorage.removeItem('kr_user');
     localStorage.removeItem('userRole');
     setIsProfileOpen(false);
-    
+
     // Notify other components
     window.dispatchEvent(new Event('kr-auth-change'));
   };
 
   const getNavLinks = () => {
     const common = [{ name: 'Avaleht', href: '/' }];
-    
+
     if (!user) {
       return [
         ...common,
@@ -135,7 +135,7 @@ export function Navbar() {
       <div className="w-full px-4 sm:px-6 lg:px-8 relative">
         {/* Juurdepääsetavus Button: Absolute-positioned on the far left of the viewport */}
         <div className="absolute left-4 top-1/2 -translate-y-1/2 z-10 hidden lg:block">
-          <button 
+          <button
             onClick={() => setIsAccessOpen(true)}
             className="flex items-center gap-2 px-3 py-2 rounded-full text-sm font-semibold text-gray-700 hover:text-blue-700 hover:bg-blue-50 border border-gray-200 transition-all cursor-pointer shrink-0 shadow-xs"
             aria-label="Juurdepääsetavuse seaded"
@@ -151,7 +151,7 @@ export function Navbar() {
           <div className="flex items-center gap-8">
             {/* Show button in normal flow only on mobile/tablet to avoid overlapping */}
             <div className="lg:hidden">
-              <button 
+              <button
                 onClick={() => setIsAccessOpen(true)}
                 className="flex items-center gap-2 px-2.5 py-1.5 rounded-full text-sm font-semibold text-gray-700 hover:text-blue-700 hover:bg-blue-50 border border-gray-200 transition-all cursor-pointer shrink-0"
                 aria-label="Juurdepääsetavuse seaded"
@@ -161,8 +161,8 @@ export function Navbar() {
             </div>
 
             <Link href="/" className="flex-shrink-0 flex items-center font-bold text-xl tracking-tight text-gray-900 group">
-              <img src="/images/logo2.png" alt="Kultuuriraanits" className="w-10 h-10 object-contain mr-2" />
-              Kultuuriraanits
+              <img src="/images/logo2.png" alt="Kultuuriranits" className="w-10 h-10 object-contain mr-2" />
+              Kultuuriranits
             </Link>
             <div className="hidden md:flex space-x-1 text-sm font-medium">
               {navLinks.map((link) => {
@@ -171,11 +171,10 @@ export function Navbar() {
                   <Link
                     key={link.name}
                     href={link.href}
-                    className={`px-4 py-2 rounded-full transition-all duration-200 ${
-                      isActive 
-                        ? 'bg-blue-50 text-blue-700 font-semibold' 
+                    className={`px-4 py-2 rounded-full transition-all duration-200 ${isActive
+                        ? 'bg-blue-50 text-blue-700 font-semibold'
                         : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
-                    }`}
+                      }`}
                   >
                     {link.name}
                   </Link>
@@ -192,11 +191,11 @@ export function Navbar() {
                   <Bell className="w-5 h-5" />
                   <span className="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
                 </button>
-                
+
                 <div className="h-6 w-px bg-gray-200 mx-1"></div>
-                
+
                 <div className="relative" ref={profileRef}>
-                  <button 
+                  <button
                     onClick={() => setIsProfileOpen(!isProfileOpen)}
                     className="flex items-center gap-2 pl-2 pr-3 py-1.5 rounded-full border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all group"
                   >
@@ -215,7 +214,7 @@ export function Navbar() {
                           {user.role === 'teacher' ? 'Õpetaja' : user.role === 'museum' ? 'Muuseum' : 'Admin'}
                         </p>
                       </div>
-                      <button 
+                      <button
                         onClick={handleLogout}
                         className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors"
                       >
@@ -227,7 +226,7 @@ export function Navbar() {
                 </div>
               </>
             ) : (
-              <button 
+              <button
                 onClick={() => setIsLoginModalOpen(true)}
                 className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition-all shadow-md hover:shadow-lg flex items-center gap-2 transform active:scale-95"
               >
@@ -243,15 +242,15 @@ export function Navbar() {
       {isLoginModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           {/* Backdrop */}
-          <div 
-            className="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300" 
+          <div
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300"
             onClick={() => setIsLoginModalOpen(false)}
           ></div>
-          
+
           {/* Modal Content */}
           <div className="relative bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden transform transition-all duration-300 scale-100 opacity-100">
             <div className="bg-blue-600 p-8 text-white relative">
-              <button 
+              <button
                 onClick={() => setIsLoginModalOpen(false)}
                 className="absolute top-4 right-4 p-2 hover:bg-white/10 rounded-full transition-colors"
               >
@@ -260,9 +259,9 @@ export function Navbar() {
               <h2 className="text-2xl font-bold mb-2">Tere tulemast!</h2>
               <p className="text-blue-100 opacity-90">Vali oma roll, et jätkata Kultuuriranitsa kasutamist.</p>
             </div>
-            
+
             <div className="p-6 space-y-3">
-              <button 
+              <button
                 onClick={() => handleLogin('teacher')}
                 className="w-full flex items-center gap-4 p-4 rounded-2xl border-2 border-gray-100 hover:border-blue-500 hover:bg-blue-50 transition-all group text-left"
               >
@@ -275,7 +274,7 @@ export function Navbar() {
                 </div>
               </button>
 
-              <button 
+              <button
                 onClick={() => handleLogin('museum')}
                 className="w-full flex items-center gap-4 p-4 rounded-2xl border-2 border-gray-100 hover:border-blue-500 hover:bg-blue-50 transition-all group text-left"
               >
@@ -288,7 +287,7 @@ export function Navbar() {
                 </div>
               </button>
             </div>
-            
+
             <div className="p-6 bg-gray-50 border-t border-gray-100 flex justify-center">
               <p className="text-xs text-gray-400">See on demo-sisselogimine. Parooli ei ole vaja.</p>
             </div>
@@ -300,11 +299,11 @@ export function Navbar() {
       {isAccessOpen && (
         <div className="fixed inset-0 z-[100] flex justify-end">
           {/* Backdrop */}
-          <div 
+          <div
             className="absolute inset-0 bg-black/40 backdrop-blur-xs transition-opacity duration-300"
             onClick={() => setIsAccessOpen(false)}
           ></div>
-          
+
           {/* Drawer content */}
           <div className="relative w-full max-w-md bg-white h-full shadow-2xl flex flex-col z-10 border-l border-gray-100 animate-slide-in overflow-y-auto">
             {/* Header */}
@@ -313,7 +312,7 @@ export function Navbar() {
                 <PersonStanding className="w-6 h-6 text-blue-600" />
                 <h2 className="text-xl font-bold text-gray-900">Juurdepääsetavus</h2>
               </div>
-              <button 
+              <button
                 onClick={() => setIsAccessOpen(false)}
                 className="p-2 hover:bg-gray-200 rounded-full transition-colors text-gray-500 hover:text-gray-900 cursor-pointer"
                 aria-label="Sule paneel"
@@ -329,8 +328,8 @@ export function Navbar() {
                 <p className="text-sm text-blue-950 leading-relaxed mb-4">
                   Lehe loomisel on peetud silmas, et siin avaldatav info oleks kättesaadav ja kasutatav võimalikult paljudele inimestele.
                 </p>
-                <Link 
-                  href="/juurdepaasetavus" 
+                <Link
+                  href="/juurdepaasetavus"
                   target="_blank"
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-700 hover:text-blue-900 underline"
                   onClick={() => setIsAccessOpen(false)}
@@ -347,9 +346,9 @@ export function Navbar() {
                   {/* Default Contrast */}
                   <label className={`flex items-center justify-between p-4 rounded-2xl border-2 cursor-pointer transition-all ${contrastTheme === 'default' ? 'border-blue-600 bg-blue-50/50' : 'border-gray-100 hover:border-gray-200 bg-white'}`}>
                     <div className="flex items-center gap-3">
-                      <input 
-                        type="radio" 
-                        name="contrast-theme" 
+                      <input
+                        type="radio"
+                        name="contrast-theme"
                         value="default"
                         checked={contrastTheme === 'default'}
                         onChange={() => handleContrastChange('default')}
@@ -366,9 +365,9 @@ export function Navbar() {
                   {/* Black & Yellow Contrast */}
                   <label className={`flex items-center justify-between p-4 rounded-2xl border-2 cursor-pointer transition-all ${contrastTheme === 'high-contrast' ? 'border-yellow-400 bg-gray-900 text-yellow-400' : 'border-gray-100 hover:border-gray-200 bg-white'}`}>
                     <div className="flex items-center gap-3">
-                      <input 
-                        type="radio" 
-                        name="contrast-theme" 
+                      <input
+                        type="radio"
+                        name="contrast-theme"
                         value="high-contrast"
                         checked={contrastTheme === 'high-contrast'}
                         onChange={() => handleContrastChange('high-contrast')}
@@ -389,10 +388,10 @@ export function Navbar() {
                 <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider">Teksti suurus</h3>
                 <div className="bg-gray-50 rounded-2xl p-4 border border-gray-100 text-xs text-gray-600 leading-relaxed space-y-2">
                   <p>
-                    Kõikides populaarsetes veebilehitsejates on võimalik lehte suurendada ja vähendada, kui hoida all 
-                    <kbd className="px-1.5 py-0.5 mx-0.5 text-[10px] font-semibold text-gray-800 bg-white border border-gray-200 rounded shadow-xs">Ctrl</kbd> klahvi 
-                    (OS X operatsioonisüsteemis <kbd className="px-1.5 py-0.5 mx-0.5 text-[10px] font-semibold text-gray-800 bg-white border border-gray-200 rounded shadow-xs">Cmd</kbd>) 
-                    ja samal ajal vajutada kas <kbd className="px-1.5 py-0.5 text-[10px] font-semibold text-gray-800 bg-white border border-gray-200 rounded shadow-xs">+</kbd> või 
+                    Kõikides populaarsetes veebilehitsejates on võimalik lehte suurendada ja vähendada, kui hoida all
+                    <kbd className="px-1.5 py-0.5 mx-0.5 text-[10px] font-semibold text-gray-800 bg-white border border-gray-200 rounded shadow-xs">Ctrl</kbd> klahvi
+                    (OS X operatsioonisüsteemis <kbd className="px-1.5 py-0.5 mx-0.5 text-[10px] font-semibold text-gray-800 bg-white border border-gray-200 rounded shadow-xs">Cmd</kbd>)
+                    ja samal ajal vajutada kas <kbd className="px-1.5 py-0.5 text-[10px] font-semibold text-gray-800 bg-white border border-gray-200 rounded shadow-xs">+</kbd> või
                     <kbd className="px-1.5 py-0.5 text-[10px] font-semibold text-gray-800 bg-white border border-gray-200 rounded shadow-xs">-</kbd> klahvi.
                   </p>
                   <p>

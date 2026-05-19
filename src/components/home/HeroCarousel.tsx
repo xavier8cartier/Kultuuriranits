@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 const slides = [
   {
-    title: 'Kultuuriraanits',
+    title: 'Kultuuriranits',
     description: 'Eesti suurim kultuurihariduse platvorm. Too kultuur oma õpilasteni mugavalt ja kiirelt.',
     buttonText: 'Vaata programme',
     image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070&auto=format&fit=crop',
@@ -50,12 +50,11 @@ export function HeroCarousel() {
       {slides.map((slide, index) => (
         <div
           key={index}
-          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            index === current ? 'opacity-100' : 'opacity-0'
-          }`}
+          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === current ? 'opacity-100' : 'opacity-0'
+            }`}
         >
           {/* Background Image with Overlay */}
-          <div 
+          <div
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${slide.image})` }}
           >
@@ -73,8 +72,8 @@ export function HeroCarousel() {
                   {slide.description}
                 </p>
                 <div>
-                  <Link 
-                    href="/otsi" 
+                  <Link
+                    href="/otsi"
                     className="inline-block bg-white text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-colors shadow-xl transform hover:scale-105"
                   >
                     {slide.buttonText}
@@ -106,9 +105,8 @@ export function HeroCarousel() {
           <button
             key={index}
             onClick={() => setCurrent(index)}
-            className={`w-3 h-3 rounded-full transition-all ${
-              index === current ? 'bg-white w-8' : 'bg-white/50'
-            }`}
+            className={`w-3 h-3 rounded-full transition-all ${index === current ? 'bg-white w-8' : 'bg-white/50'
+              }`}
           />
         ))}
       </div>

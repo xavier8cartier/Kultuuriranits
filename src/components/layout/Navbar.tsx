@@ -113,8 +113,9 @@ export function Navbar() {
       case 'museum':
         return [
           ...common,
-          { name: 'Minu programmid', href: '#' },
-          { name: 'Broneeringute haldus', href: '#' },
+          { name: 'Töölaud', href: '#' },
+          { name: 'Teated', href: '#' },
+          { name: 'Kultuuriprogrammid', href: '/otsi' },
         ];
       case 'admin':
         return [

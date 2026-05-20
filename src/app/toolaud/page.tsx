@@ -139,7 +139,7 @@ const DEFAULT_PROGRAMS: Program[] = [
     title: 'Ajalugu läbi esemete',
     organizer: 'Eesti Rahva Muuseum',
     location: 'Tartu, Tartumaa',
-    image: 'https://images.unsplash.com/photo-1576016770956-debb63d900ad?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=800&auto=format&fit=crop',
     shortDescription: 'Lõbus muuseumitund, kus arheoloogilised leivad ja etnograafilised asjad jutustavad põnevaid lugusid muinasajast tänapäevani.',
     fullDescription: 'Selles haridusprogrammis muutuvad muuseumi eksponaadid elavateks jutuvestjateks. Õpilased saavad ise esemeid uurida, mõistatada nende otstarvet ja panna kokku ajaloo puslet.',
     price: '8€',
@@ -412,7 +412,24 @@ export default function ToolaudPage() {
     // Initialize databases in localStorage if not present
     const savedProgs = localStorage.getItem('kr_programs');
     if (savedProgs) {
-      setProgramsList(JSON.parse(savedProgs));
+      try {
+        let parsed = JSON.parse(savedProgs);
+        let updated = false;
+        parsed = parsed.map((p: any) => {
+          if (p.id === 'erm-esemet' && p.image !== 'https://www.erm.ee/wp-content/uploads/2016/04/kohtumised1-1280x400.jpg') {
+            updated = true;
+            return { ...p, image: 'https://www.erm.ee/wp-content/uploads/2016/04/kohtumised1-1280x400.jpg' };
+          }
+          return p;
+        });
+        if (updated) {
+          localStorage.setItem('kr_programs', JSON.stringify(parsed));
+        }
+        setProgramsList(parsed);
+      } catch (e) {
+        console.error('Failed to parse kr_programs', e);
+        setProgramsList(DEFAULT_PROGRAMS);
+      }
     } else {
       localStorage.setItem('kr_programs', JSON.stringify(DEFAULT_PROGRAMS));
       setProgramsList(DEFAULT_PROGRAMS);

@@ -25,6 +25,17 @@ export default function SearchPage() {
     if (savedProgs) {
       try {
         loaded = JSON.parse(savedProgs);
+        let updated = false;
+        loaded = loaded.map((p: Program) => {
+          if (p.id === 'erm-esemet' && p.image !== 'https://www.erm.ee/wp-content/uploads/2016/04/kohtumised1-1280x400.jpg') {
+            updated = true;
+            return { ...p, image: 'https://www.erm.ee/wp-content/uploads/2016/04/kohtumised1-1280x400.jpg' };
+          }
+          return p;
+        });
+        if (updated) {
+          localStorage.setItem('kr_programs', JSON.stringify(loaded));
+        }
       } catch (e) {
         console.error('Failed to parse kr_programs from localStorage', e);
       }

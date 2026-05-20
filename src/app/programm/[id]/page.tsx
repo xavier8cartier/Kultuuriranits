@@ -54,11 +54,18 @@ export default function ProgramDetailPage({ params }: PageProps) {
         allPrograms = JSON.parse(savedProgs);
         let updated = false;
         allPrograms = allPrograms.map((p: Program) => {
-          if (p.id === 'erm-esemet' && p.image !== 'https://www.erm.ee/wp-content/uploads/2016/04/kohtumised1-1280x400.jpg') {
-            updated = true;
-            return { ...p, image: 'https://www.erm.ee/wp-content/uploads/2016/04/kohtumised1-1280x400.jpg' };
+          let pUpdated = false;
+          let newP = { ...p };
+          if (newP.id === 'erm-esemet' && newP.image !== 'https://www.erm.ee/wp-content/uploads/2016/04/kohtumised1-1280x400.jpg') {
+            newP.image = 'https://www.erm.ee/wp-content/uploads/2016/04/kohtumised1-1280x400.jpg';
+            pUpdated = true;
           }
-          return p;
+          if (newP.availableTimes && newP.availableTimes.some(t => t.includes('2026-05-15'))) {
+            newP.availableTimes = newP.availableTimes.map(t => t.replace('2026-05-15', '2026-05-25'));
+            pUpdated = true;
+          }
+          if (pUpdated) updated = true;
+          return newP;
         });
         if (updated) {
           localStorage.setItem('kr_programs', JSON.stringify(allPrograms));

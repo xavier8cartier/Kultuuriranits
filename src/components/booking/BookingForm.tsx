@@ -74,6 +74,11 @@ export function BookingForm({ programId, pricePerStudent }: BookingFormProps) {
       }
 
       if (foundProg) {
+        // Hotfix: Migrate past dates to future dates
+        if (foundProg.availableTimes && foundProg.availableTimes.some((t: string) => t.includes('2026-05-15'))) {
+          foundProg.availableTimes = foundProg.availableTimes.map((t: string) => t.replace('2026-05-15', '2026-05-25'));
+        }
+
         setProgram(foundProg);
         // Pre-select first date if available
         if (foundProg.availableTimes && foundProg.availableTimes.length > 0) {
@@ -347,7 +352,7 @@ export function BookingForm({ programId, pricePerStudent }: BookingFormProps) {
             <span className="text-xs font-bold text-gray-400 uppercase tracking-wider block">3. Grupi andmed:</span>
 
             {/* School & Class details (Pre-filled, editable) */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-4">
               <div className="space-y-1.5">
                 <label className="text-[10px] font-extrabold text-gray-400 uppercase tracking-wider block">Kool:</label>
                 <input

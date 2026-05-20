@@ -29,7 +29,7 @@ export const programs: Program[] = [
     contactEmail: 'info@padiseklooster.ee',
     contactPhone: '+372 5811 8119',
     bookingMethod: 'platform',
-    availableTimes: ['2026-05-15 10:00', '2026-05-15 13:00', '2026-05-22 11:00'],
+    availableTimes: ['2026-05-25 10:00', '2026-05-25 13:00', '2026-05-22 11:00'],
     reviews: [
       {
         id: 'r1',
@@ -93,7 +93,7 @@ export const programs: Program[] = [
     contactEmail: 'haridus@erm.ee',
     contactPhone: '+372 736 3050',
     bookingMethod: 'platform',
-    availableTimes: ['2026-05-15 09:00', '2026-05-15 11:00', '2026-05-15 13:00', '2026-05-15 15:00'],
+    availableTimes: ['2026-05-25 09:00', '2026-05-25 11:00', '2026-05-25 13:00', '2026-05-25 15:00'],
     reviews: [
       {
         id: 'r3',

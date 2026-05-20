@@ -132,7 +132,7 @@ const DEFAULT_PROGRAMS: Program[] = [
     outdoor: false,
     additionalInfo: 'Soovitame kaasa võtta mugavad riided ja kirjutusvahendi. Osa tegevusi võib toimuda õues, seega palume arvestada ilmastikutingimustega.',
     bookingMethod: 'platform',
-    availableTimes: ['2026-05-15 10:00', '2026-05-15 12:00', '2026-05-15 14:00']
+    availableTimes: ['2026-05-25 10:00', '2026-05-25 12:00', '2026-05-25 14:00']
   },
   {
     id: 'erm-esemet',
@@ -219,7 +219,7 @@ const DEFAULT_PROGRAMS: Program[] = [
     outdoor: false,
     additionalInfo: 'Soovitame kaasa võtta mugavad riided ja kirjutusvahend. Osa tegevusi võib toimuda õues, seega palume arvestada ilmastikutingimustega.',
     bookingMethod: 'platform',
-    availableTimes: ['2026-05-15 09:00', '2026-05-15 11:00', '2026-05-15 13:00', '2026-05-15 15:00']
+    availableTimes: ['2026-05-25 09:00', '2026-05-25 11:00', '2026-05-25 13:00', '2026-05-25 15:00']
   }
 ];
 
@@ -365,7 +365,7 @@ export default function ToolaudPage() {
   });
   const [formAdditionalInfo, setFormAdditionalInfo] = useState('Soovitame kaasa võtta mugavad riided ja kirjutusvahend.');
   const [formBookingMethod, setFormBookingMethod] = useState<'platform' | 'contact'>('platform');
-  const [formAvailableTimes, setFormAvailableTimes] = useState<string[]>(['2026-05-15 10:00', '2026-05-15 12:00', '2026-05-15 14:00']);
+  const [formAvailableTimes, setFormAvailableTimes] = useState<string[]>(['2026-05-25 10:00', '2026-05-25 12:00', '2026-05-25 14:00']);
   const [formMaterials, setFormMaterials] = useState<{ name: string; url: string }[]>([
     { name: 'Tööleht_muuseum.pdf', url: '#' },
     { name: 'Õpetaja_juhend.docx', url: '#' }
@@ -374,7 +374,7 @@ export default function ToolaudPage() {
 
   // Dynamic Add State helpers
   const [newTimeInput, setNewTimeInput] = useState('10:00');
-  const [newDateInput, setNewDateInput] = useState('2026-05-15');
+  const [newDateInput, setNewDateInput] = useState('2026-05-25');
   const [newMaterialName, setNewMaterialName] = useState('');
   const [newMaterialUrl, setNewMaterialUrl] = useState('#');
 
@@ -416,11 +416,18 @@ export default function ToolaudPage() {
         let parsed = JSON.parse(savedProgs);
         let updated = false;
         parsed = parsed.map((p: any) => {
-          if (p.id === 'erm-esemet' && p.image !== 'https://www.erm.ee/wp-content/uploads/2016/04/kohtumised1-1280x400.jpg') {
-            updated = true;
-            return { ...p, image: 'https://www.erm.ee/wp-content/uploads/2016/04/kohtumised1-1280x400.jpg' };
+          let pUpdated = false;
+          let newP = { ...p };
+          if (newP.id === 'erm-esemet' && newP.image !== 'https://www.erm.ee/wp-content/uploads/2016/04/kohtumised1-1280x400.jpg') {
+            newP.image = 'https://www.erm.ee/wp-content/uploads/2016/04/kohtumised1-1280x400.jpg';
+            pUpdated = true;
           }
-          return p;
+          if (newP.availableTimes && newP.availableTimes.some((t: string) => t.includes('2026-05-15'))) {
+            newP.availableTimes = newP.availableTimes.map((t: string) => t.replace('2026-05-15', '2026-05-25'));
+            pUpdated = true;
+          }
+          if (pUpdated) updated = true;
+          return newP;
         });
         if (updated) {
           localStorage.setItem('kr_programs', JSON.stringify(parsed));
@@ -556,7 +563,7 @@ export default function ToolaudPage() {
     });
     setFormAdditionalInfo('Soovitame kaasa võtta mugavad riided ja kirjutusvahend.');
     setFormBookingMethod('platform');
-    setFormAvailableTimes(['2026-05-15 10:00', '2026-05-15 12:00', '2026-05-15 14:00']);
+    setFormAvailableTimes(['2026-05-25 10:00', '2026-05-25 12:00', '2026-05-25 14:00']);
     setFormMaterials([
       { name: 'Tööleht_muuseum.pdf', url: '#' },
       { name: 'Õpetaja_juhend.docx', url: '#' }

@@ -140,8 +140,9 @@ export function Navbar() {
         return [
           ...common,
           { name: 'Kultuuriprogrammid', href: '/otsi' },
-          { name: 'Minu broneeringud', href: '#' },
-          { name: 'Lemmikud', href: '#' },
+          { name: 'Minu broneeringud', href: '/minu-broneeringud' },
+          { name: 'Lemmikud', href: '/lemmikud' },
+          { name: 'Teated', href: '/teated' },
         ];
       case 'museum':
         return [

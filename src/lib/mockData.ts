@@ -1,4 +1,4 @@
-import { Program, FilterOptions, Notification } from './types';
+import { Program, FilterOptions, Notification, Booking } from './types';
 
 export const programs: Program[] = [
   {
@@ -214,7 +214,8 @@ export const defaultNotifications: Notification[] = [
     studentsCount: 22,
     location: 'Eesti Rahva Muuseum',
     isRead: false,
-    type: 'cancel'
+    type: 'cancel',
+    recipientRole: 'museum'
   },
   {
     id: 'n2',
@@ -228,7 +229,8 @@ export const defaultNotifications: Notification[] = [
     studentsCount: 28,
     location: 'Eesti Rahva Muuseum',
     isRead: true,
-    type: 'feedback'
+    type: 'feedback',
+    recipientRole: 'museum'
   },
   {
     id: 'n3',
@@ -242,6 +244,125 @@ export const defaultNotifications: Notification[] = [
     studentsCount: 25,
     location: 'Eesti Rahva Muuseum',
     isRead: false,
-    type: 'booking'
+    type: 'booking',
+    recipientRole: 'museum'
+  },
+  {
+    id: 'n4',
+    title: 'Sinu broneering on kinnitatud!',
+    content: 'Eesti Rahva Muuseum kinnitas sinu broneeringu programmile "Eesti kultuuri avastamine". Kohtume 15.05.2026 kell 10:00.',
+    sender: 'Eesti Rahva Muuseum',
+    date: '30.04.2026',
+    time: '09:00',
+    bookingDate: '15.05.2026 kell 10:00',
+    location: 'Tartu, Tartumaa',
+    isRead: false,
+    type: 'system',
+    recipientRole: 'teacher'
+  },
+  {
+    id: 'n5',
+    title: 'Aeg jätta tagasiside',
+    content: 'Käisid hiljuti programmiga "Teatritrikk Kunkumoor". Palun jäta oma kogemuse kohta tagasiside, et aidata teisi õpetajaid!',
+    sender: 'Süsteem',
+    date: '28.04.2026',
+    time: '14:00',
+    isRead: true,
+    type: 'feedback',
+    recipientRole: 'teacher'
+  }
+];
+
+export const defaultBookings: Booking[] = [
+  {
+    id: 'b1',
+    programId: 'erm-avastamine',
+    programTitle: 'Eesti kultuuri avastamine',
+    date: '2026-05-12',
+    time: '12:00',
+    studentsCount: 26,
+    className: '8A',
+    schoolName: 'Tallinna Ühisgümnaasium',
+    cityName: 'Tallinn',
+    duration: '90 min',
+    status: 'ootel'
+  },
+  {
+    id: 'b2',
+    programId: 'erm-avastamine',
+    programTitle: 'Eesti kultuuri avastamine',
+    date: '2026-05-13',
+    time: '13:30',
+    studentsCount: 34,
+    className: '7B',
+    schoolName: 'Tartu Kivilinna Kool',
+    cityName: 'Tartu',
+    duration: '90 min',
+    status: 'ootel'
+  },
+  {
+    id: 'b3',
+    programId: 'erm-avastamine',
+    programTitle: 'Eesti kultuuri avastamine',
+    date: '2026-05-15',
+    time: '10:30',
+    studentsCount: 20,
+    className: '9C',
+    schoolName: 'Pärnu Ülejõe Kool',
+    cityName: 'Pärnu',
+    duration: '90 min',
+    status: 'ootel'
+  },
+  {
+    id: 'b4',
+    programId: 'erm-esemet',
+    programTitle: 'Ajalugu läbi esemete',
+    date: '2026-05-15',
+    time: '13:00',
+    studentsCount: 20,
+    className: '5A',
+    schoolName: 'Tallinna Reaalkool',
+    cityName: 'Tallinn',
+    duration: '60 min',
+    status: 'kinnitatud'
+  },
+  {
+    id: 'b5',
+    programId: 'erm-loovus',
+    programTitle: 'Loov avastusretk',
+    date: '2026-05-20',
+    time: '11:00',
+    studentsCount: 20,
+    className: '6',
+    schoolName: 'Paide Gümnaasium',
+    cityName: 'Paide',
+    duration: '120 min',
+    status: 'kinnitatud'
+  },
+  {
+    id: 'b6',
+    programId: 'erm-loovus',
+    programTitle: 'Loov avastusretk',
+    date: '2026-05-21',
+    time: '12:00',
+    studentsCount: 20,
+    className: '8B',
+    schoolName: 'Viljandi Kesklinna Kool',
+    cityName: 'Viljandi',
+    duration: '120 min',
+    status: 'ootel'
+  },
+  {
+    id: 'b7',
+    programId: 'erm-esemet',
+    programTitle: 'Ajalugu läbi esemete',
+    date: '2026-05-29',
+    time: '13:15',
+    studentsCount: 20,
+    className: '9A',
+    schoolName: 'Gustav Adolfi Gümnaasium',
+    cityName: 'Tallinn',
+    duration: '60 min',
+    status: 'ootel'
   }
 ];

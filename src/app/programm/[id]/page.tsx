@@ -2,7 +2,7 @@
 
 import { use, useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ChevronLeft, MapPin, Clock, Users, Globe, FileText, Accessibility, Mail, Phone } from 'lucide-react';
+import { ChevronLeft, MapPin, Clock, Users, Globe, FileText, Accessibility, Mail, Phone, Heart } from 'lucide-react';
 import { programs as staticPrograms } from '@/lib/mockData';
 import { ProgramDetailLayout } from '@/components/program/ProgramDetailLayout';
 import { FeedbackSection } from '@/components/program/FeedbackSection';
@@ -16,6 +16,34 @@ export default function ProgramDetailPage({ params }: PageProps) {
   const { id } = use(params);
   const [program, setProgram] = useState<Program | null>(null);
   const [loading, setLoading] = useState(true);
+  const [userRole, setUserRole] = useState<string | null>(null);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    const checkAuth = () => {
+      setUserRole(localStorage.getItem('userRole'));
+    };
+    checkAuth();
+    window.addEventListener('kr-auth-change', checkAuth);
+    
+    // Check favorites
+    const checkFavorites = () => {
+      const savedFavorites = localStorage.getItem('kr_favorites');
+      if (savedFavorites) {
+        try {
+          const parsed = JSON.parse(savedFavorites);
+          setIsFavorite(parsed.includes(id));
+        } catch (e) {}
+      }
+    };
+    checkFavorites();
+    window.addEventListener('kr-favorites-updated', checkFavorites);
+
+    return () => {
+      window.removeEventListener('kr-auth-change', checkAuth);
+      window.removeEventListener('kr-favorites-updated', checkFavorites);
+    };
+  }, [id]);
 
   useEffect(() => {
     // 1. Get from localStorage
@@ -90,6 +118,30 @@ export default function ProgramDetailPage({ params }: PageProps) {
 
   const priceValue = parseInt(program.price.replace(/[^0-9]/g, '')) || 0;
 
+  const toggleFavorite = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    let currentFavorites: string[] = [];
+    const saved = localStorage.getItem('kr_favorites');
+    if (saved) {
+      try {
+        currentFavorites = JSON.parse(saved);
+      } catch (e) {}
+    }
+    
+    let newFavorites;
+    if (isFavorite) {
+      newFavorites = currentFavorites.filter(favId => favId !== id);
+    } else {
+      newFavorites = [...currentFavorites, id];
+    }
+    
+    localStorage.setItem('kr_favorites', JSON.stringify(newFavorites));
+    setIsFavorite(!isFavorite);
+    window.dispatchEvent(new Event('kr-favorites-updated'));
+  };
+
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       {/* Back button */}
@@ -112,6 +164,15 @@ export default function ProgramDetailPage({ params }: PageProps) {
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/image:scale-[1.01]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent"></div>
+              {userRole === 'teacher' && (
+                <button 
+                  onClick={toggleFavorite}
+                  className="absolute top-4 right-4 p-3 bg-white/90 hover:bg-white backdrop-blur-sm rounded-full shadow-md transition-all duration-200 cursor-pointer border border-gray-100 hover:border-red-100"
+                  aria-label="Lisa lemmikutesse"
+                >
+                  <Heart className={`w-6 h-6 transition-colors duration-200 ${isFavorite ? 'fill-red-500 text-red-500' : 'text-gray-400 hover:text-red-400'}`} />
+                </button>
+              )}
             </div>
             <div className="p-6 sm:p-8">
               <div className="flex items-center text-xs font-bold text-gray-400 gap-1.5 uppercase tracking-wider mb-2">

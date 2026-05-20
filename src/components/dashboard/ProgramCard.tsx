@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Program } from '@/lib/types';
-import { MapPin, Clock, Users, Globe, ChevronRight, GraduationCap, Building2, Calendar } from 'lucide-react';
+import { MapPin, Clock, Users, Globe, ChevronRight, GraduationCap, Building2, Calendar, Heart } from 'lucide-react';
 
 interface ProgramCardProps {
   program: Program;
@@ -9,17 +9,53 @@ interface ProgramCardProps {
 
 export function ProgramCard({ program }: ProgramCardProps) {
   const [userRole, setUserRole] = useState<string | null>(null);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     const checkAuth = () => {
       const role = localStorage.getItem('userRole');
       setUserRole(role);
     };
+    
+    // Initial favorite check
+    const savedFavorites = localStorage.getItem('kr_favorites');
+    if (savedFavorites) {
+      try {
+        const parsed = JSON.parse(savedFavorites);
+        setIsFavorite(parsed.includes(program.id));
+      } catch (e) {}
+    }
 
     checkAuth();
     window.addEventListener('kr-auth-change', checkAuth);
     return () => window.removeEventListener('kr-auth-change', checkAuth);
-  }, []);
+  }, [program.id]);
+
+  const toggleFavorite = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    let currentFavorites: string[] = [];
+    const saved = localStorage.getItem('kr_favorites');
+    if (saved) {
+      try {
+        currentFavorites = JSON.parse(saved);
+      } catch (e) {}
+    }
+    
+    let newFavorites;
+    if (isFavorite) {
+      newFavorites = currentFavorites.filter(id => id !== program.id);
+    } else {
+      newFavorites = [...currentFavorites, program.id];
+    }
+    
+    localStorage.setItem('kr_favorites', JSON.stringify(newFavorites));
+    setIsFavorite(!isFavorite);
+    
+    // Dispatch event so favorites page can update
+    window.dispatchEvent(new Event('kr-favorites-updated'));
+  };
 
   return (
     <div className="group bg-white rounded-2xl border border-gray-150 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row relative">
@@ -36,6 +72,15 @@ export function ProgramCard({ program }: ProgramCardProps) {
             Kultuuriranits
           </span>
         </div>
+        {userRole === 'teacher' && (
+          <button 
+            onClick={toggleFavorite}
+            className="absolute top-3 right-3 p-2 bg-white/90 hover:bg-white backdrop-blur-sm rounded-full shadow-sm transition-all duration-200 cursor-pointer border border-gray-100 hover:border-red-100"
+            aria-label="Lisa lemmikutesse"
+          >
+            <Heart className={`w-5 h-5 transition-colors duration-200 ${isFavorite ? 'fill-red-500 text-red-500' : 'text-gray-400 hover:text-red-400'}`} />
+          </button>
+        )}
       </div>
 
       {/* Content Side */}

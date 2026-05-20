@@ -127,14 +127,19 @@ export default function TeatedPage() {
       matchesDate = n.date === formattedFilterDate;
     }
     
-    return matchesSearch && matchesDate;
+    let matchesRole = true;
+    if (userRole) {
+      matchesRole = n.recipientRole === userRole || (!n.recipientRole && userRole === 'museum');
+    }
+    
+    return matchesSearch && matchesDate && matchesRole;
   });
 
   // Calculate unread count
   const unreadCount = notificationsList.filter(n => !n.isRead).length;
 
   // Access Control Restricted View
-  if (userRole !== 'museum') {
+  if (userRole !== 'museum' && userRole !== 'teacher') {
     return (
       <div className="max-w-4xl mx-auto px-4 py-16 text-center">
         <div className="bg-white rounded-3xl border border-gray-150 p-8 sm:p-12 shadow-xl relative overflow-hidden">
@@ -148,7 +153,7 @@ export default function TeatedPage() {
             
             <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight mb-4">Juurdepääs piiratud</h1>
             <p className="text-lg text-gray-600 max-w-lg mx-auto mb-8 leading-relaxed font-normal">
-              See vaade on mõeldud ainult registreeritud kultuuriasutustele. Logi sisse kultuuriasutuse kontoga, et näha oma teateid.
+              See vaade on mõeldud ainult registreeritud kasutajatele. Logi sisse, et näha oma teateid.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

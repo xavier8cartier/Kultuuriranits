@@ -48,11 +48,18 @@ export interface Review {
 export interface Booking {
   id: string;
   programId: string;
+  programTitle?: string;
   date: string;
   time: string;
   studentsCount: number;
-  status: 'ootel' | 'kinnitatud' | 'tühistatud';
+  className?: string;
+  schoolName?: string;
+  cityName?: string;
+  duration?: string;
+  status: 'ootel' | 'kinnitatud' | 'tühistatud' | 'tagasilukatud';
   totalPrice?: number;
+  rejectionReason?: string;
+  hasFeedback?: boolean;
 }
 
 export interface FilterOptions {
@@ -75,5 +82,6 @@ export interface Notification {
   location?: string;
   isRead: boolean;
   type: 'cancel' | 'feedback' | 'booking' | 'system';
+  recipientRole?: 'teacher' | 'museum';
 }
 

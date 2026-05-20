@@ -110,7 +110,7 @@ export function PopularPrograms() {
                 <div className="absolute top-4 left-4 flex gap-1.5">
                   <span className="bg-blue-600/90 backdrop-blur-md text-[9px] font-bold text-white uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm border border-blue-500/20 flex items-center gap-1">
                     <Star className="w-2.5 h-2.5 fill-white text-white" />
-                    Kultuuriranits
+                    Populaarne
                   </span>
                 </div>
               </div>

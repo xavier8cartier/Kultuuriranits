@@ -69,7 +69,7 @@ export function ProgramCard({ program }: ProgramCardProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent"></div>
         <div className="absolute top-3 left-3">
           <span className="bg-blue-600/90 backdrop-blur-md text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-sm border border-blue-500/20">
-            Kultuuriranits
+            Populaarne
           </span>
         </div>
         {userRole === 'teacher' && (

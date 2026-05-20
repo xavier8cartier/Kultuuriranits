@@ -77,17 +77,27 @@ export function SearchBar({
           onChange={(e) => onChange && onChange(e.target.value)}
         />
         
-        <div className="pr-2 flex items-center">
+        <div className="pr-4 flex items-center gap-2.5 shrink-0">
+          <span className={`whitespace-nowrap text-xs font-extrabold uppercase tracking-widest select-none transition-colors duration-300 ${activeIsAiMode ? 'text-purple-600' : 'text-gray-400'}`}>
+            AI otsing
+          </span>
           <button 
+            type="button"
+            role="switch"
+            aria-checked={activeIsAiMode}
             onClick={() => activeSetIsAiMode(!activeIsAiMode)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 cursor-pointer shadow-xs active:scale-95 select-none ${
-              activeIsAiMode 
-                ? 'bg-gradient-to-r from-purple-100 to-blue-100 text-purple-750 border border-purple-250 hover:from-purple-200 hover:to-blue-200 shadow-xs' 
-                : 'bg-gray-150 text-gray-650 hover:bg-gray-250 hover:text-gray-900 border border-gray-200'
+            className={`relative inline-flex h-7 w-12 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-300 ease-in-out focus:outline-none active:scale-95 ${
+              activeIsAiMode ? 'bg-gradient-to-r from-purple-500 to-blue-500 shadow-inner' : 'bg-gray-200'
             }`}
           >
-            <Sparkles className="w-4 h-4 text-purple-650 shrink-0" />
-            AI otsing
+            <span
+              aria-hidden="true"
+              className={`pointer-events-none inline-flex h-6 w-6 transform items-center justify-center rounded-full bg-white shadow-sm ring-0 transition duration-300 ease-in-out ${
+                activeIsAiMode ? 'translate-x-5' : 'translate-x-0'
+              }`}
+            >
+              {activeIsAiMode && <Sparkles className="w-3.5 h-3.5 text-purple-600" />}
+            </span>
           </button>
         </div>
       </div>

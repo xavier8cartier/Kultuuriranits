@@ -21,7 +21,7 @@ export default function SearchPage() {
   // Search state
   const [searchQuery, setSearchQuery] = useState('');
   const [isAiMode, setIsAiMode] = useState(false);
-  const [isAdvancedOpen, setIsAdvancedOpen] = useState(true);
+  const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
 
   // Filter states
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
